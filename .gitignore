@@ -1,0 +1,7 @@
+.env
+.vscode
+.idea
+data
+wordpress/core
+wordpress/vendor
+wordpress/wp-content

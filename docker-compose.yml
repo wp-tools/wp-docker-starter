@@ -1,0 +1,48 @@
+version: '3.6'
+
+services:
+
+### WordPress Nginx #############################################
+
+  wordpress-nginx:
+    image: nginx:alpine
+    ports:
+      - 80:80
+    volumes:
+      - ./wordpress/nginx.conf:/etc/nginx/conf.d/default.conf
+      - ./wordpress:/app/wordpress
+      - ./wordpress/wp-content:/app/wordpress/core/wp-content
+
+### WordPress PHP ###############################################
+
+  wordpress-php:
+    build:
+      context: ./wordpress/docker
+    volumes:
+      - ./wordpress:/app/wordpress
+      - ./wordpress/wp-content:/app/wordpress/core/wp-content
+    environment:
+          WP_MYSQL_DATABASE: ${WP_MYSQL_DATABASE}
+          WP_MYSQL_PASSWORD: ${WP_MYSQL_PASSWORD}
+          WP_MYSQL_USER: ${WP_MYSQL_USER}
+          WP_AUTH_KEY: ${WP_AUTH_KEY}
+          WP_SECURE_AUTH_KEY: ${WP_SECURE_AUTH_KEY}
+          WP_LOGGED_IN_KEY: ${WP_LOGGED_IN_KEY}
+          WP_NONCE_KEY: ${WP_NONCE_KEY}
+          WP_AUTH_SALT: ${WP_AUTH_SALT}
+          WP_SECURE_AUTH_SALT: ${WP_SECURE_AUTH_SALT}
+          WP_LOGGED_IN_SALT: ${WP_LOGGED_IN_SALT}
+          WP_NONCE_SALT: ${WP_NONCE_SALT}
+
+### WordPress Mysql ###############################################
+  wordpress-mysql:
+      image: mariadb:10.3
+      ports:
+          - 3306:3306
+      volumes:
+          - ./data/wordpress/mysql:/var/lib/mysql
+      environment:
+          MYSQL_DATABASE: ${WP_MYSQL_DATABASE}
+          MYSQL_PASSWORD: ${WP_MYSQL_PASSWORD}
+          MYSQL_ROOT_PASSWORD: ${WP_MYSQL_ROOT_PASSWORD}
+          MYSQL_USER: ${WP_MYSQL_USER}

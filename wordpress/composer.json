@@ -1,0 +1,23 @@
+{
+  "repositories": [
+    {
+      "type": "composer",
+      "url": "https://wpackagist.org"
+    }
+  ],
+  "require": {
+    "johnpbloch/wordpress-core-installer": "^1",
+    "johnpbloch/wordpress-core": "4.9.6",
+    "wpackagist-theme/twentyseventeen": "1.6"
+  },
+  "require-dev": {
+    "wp-cli/wp-cli": "~1.5"
+  },
+  "extra": {
+    "installer-paths": {
+      "wp-content/plugins/{$name}/": ["type:wordpress-plugin"],
+      "wp-content/themes/{$name}/": ["type:wordpress-theme"]
+    },
+    "wordpress-install-dir": "core"
+  }
+}
