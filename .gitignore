@@ -12,10 +12,7 @@ wordpress/wp-content/uploads/*
 wordpress/wp-content/mu-plugins/*
 
 # Don't ignore these.
-# If you're developing a theme or plugin, ass it as an exlusions.
-!wordpress/wp-content/plugins/.gitkeep
-!wordpress/wp-content/themes/.gitkeep
-!wordpress/wp-content/uploads/.gitkeep
+# If you're developing a theme or plugin, add it as an exlusions.
 # !wordpress/wp-content/plugins/example-plugin
 # !wordpress/wp-content/themes/example-theme
 # !wordpress/wp-content/mu-plugins/example-plugin.php
