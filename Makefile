@@ -32,7 +32,7 @@ endif
 build:
 	@docker-compose build
 
-up: setup
+up:
 	@docker-compose up
 
 down:
