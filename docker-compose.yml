@@ -12,6 +12,8 @@ services:
       - ./wordpress/nginx.conf:/etc/nginx/conf.d/default.conf
       - ./wordpress:/app/wordpress
       - ./wordpress/wp-content:/app/wordpress/core/wp-content
+    depends_on:
+      - wordpress-php
 
 ### WordPress PHP ###############################################
 
@@ -21,7 +23,12 @@ services:
     volumes:
       - ./wordpress:/app/wordpress
       - ./wordpress/wp-content:/app/wordpress/core/wp-content
+    depends_on:
+      - wordpress-mysql
     environment:
+          WP_DOMAIN: ${WP_DOMAIN}
+          WP_MULTISITE: ${WP_MULTISITE}
+          WP_DOMAIN: ${WP_DOMAIN}
           WP_MYSQL_DATABASE: ${WP_MYSQL_DATABASE}
           WP_MYSQL_PASSWORD: ${WP_MYSQL_PASSWORD}
           WP_MYSQL_USER: ${WP_MYSQL_USER}

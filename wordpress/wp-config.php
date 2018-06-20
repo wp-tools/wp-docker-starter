@@ -15,42 +15,42 @@
  *
  * @package WordPress
  *
- * @link https://codex.wordpress.org/Editing_wp-config.php
+ * @link    https://codex.wordpress.org/Editing_wp-config.php
  */
 
 // ** MySQL settings - You can get this info from your web host ** //
 /**
  * The name of the database for WordPress
  */
-define('DB_NAME', getenv('WP_MYSQL_DATABASE'));
+define( 'DB_NAME', getenv( 'WP_MYSQL_DATABASE' ) );
 
 /**
  * MySQL database username
-*/
-define('DB_USER', getenv('WP_MYSQL_USER'));
+ */
+define( 'DB_USER', getenv( 'WP_MYSQL_USER' ) );
 
 /**
  * MySQL database password
-*/
-define('DB_PASSWORD', getenv('WP_MYSQL_PASSWORD'));
+ */
+define( 'DB_PASSWORD', getenv( 'WP_MYSQL_PASSWORD' ) );
 
 /**
  * MySQL hostname
-*/
-define('DB_HOST', 'wordpress-mysql');
+ */
+define( 'DB_HOST', 'wordpress-mysql' );
 
 /**
  * Database Charset to use in creating database tables.
-*/
-define('DB_CHARSET', 'utf8');
+ */
+define( 'DB_CHARSET', 'utf8' );
 
 /**
  * The Database Collate type. Don't change this if in doubt.
-*/
-define('DB_COLLATE', '');
+ */
+define( 'DB_COLLATE', '' );
 
 /**
-* #@+
+ * #@+
  * Authentication Unique Keys and Salts.
  *
  * Change these to different unique phrases!
@@ -59,18 +59,14 @@ define('DB_COLLATE', '');
  *
  * @since 2.6.0
  */
-define('AUTH_KEY',         '${WP_AUTH_KEY}');
-define('SECURE_AUTH_KEY',  '${WP_SECURE_AUTH_KEY}');
-define('LOGGED_IN_KEY',    '${WP_LOGGED_IN_KEY}');
-define('NONCE_KEY',        '${WP_NONCE_KEY}');
-define('AUTH_SALT',        '${WP_AUTH_SALT}');
-define('SECURE_AUTH_SALT', '${WP_SECURE_AUTH_SALT}');
-define('LOGGED_IN_SALT',   '${WP_LOGGED_IN_SALT}');
-define('NONCE_SALT',       '${WP_NONCE_SALT}');
-
-/**
-* #@-
-*/
+define( 'AUTH_KEY', '${WP_AUTH_KEY}' );
+define( 'SECURE_AUTH_KEY', '${WP_SECURE_AUTH_KEY}' );
+define( 'LOGGED_IN_KEY', '${WP_LOGGED_IN_KEY}' );
+define( 'NONCE_KEY', '${WP_NONCE_KEY}' );
+define( 'AUTH_SALT', '${WP_AUTH_SALT}' );
+define( 'SECURE_AUTH_SALT', '${WP_SECURE_AUTH_SALT}' );
+define( 'LOGGED_IN_SALT', '${WP_LOGGED_IN_SALT}' );
+define( 'NONCE_SALT', '${WP_NONCE_SALT}' );
 
 /**
  * WordPress Database Table prefix.
@@ -78,7 +74,17 @@ define('NONCE_SALT',       '${WP_NONCE_SALT}');
  * You can have multiple installations in one database if you give each
  * a unique prefix. Only numbers, letters, and underscores please!
  */
-$table_prefix  = 'wp_';
+$table_prefix = 'wp_';
+
+if ( 'true' === getenv( 'WP_MULTISITE' ) ) {
+	define( 'WP_ALLOW_MULTISITE', true );
+	define( 'MULTISITE', true );
+	define( 'SUBDOMAIN_INSTALL', true );
+	define( 'DOMAIN_CURRENT_SITE', getenv( 'WP_DOMAIN' ) );
+	define( 'PATH_CURRENT_SITE', '/' );
+	define( 'SITE_ID_CURRENT_SITE', 1 );
+	define( 'BLOG_ID_CURRENT_SITE', 1 );
+}
 
 /**
  * For developers: WordPress debugging mode.
@@ -92,18 +98,18 @@ $table_prefix  = 'wp_';
  *
  * @link https://codex.wordpress.org/Debugging_in_WordPress
  */
-define('WP_DEBUG', '${WP_DEBUG}');
+define( 'WP_DEBUG', '${WP_DEBUG}' );
 
 /* That's all, stop editing! Happy blogging. */
 
 /**
  * Absolute path to the WordPress directory.
-*/
-if (!defined('ABSPATH') ) {
-    define('ABSPATH', dirname(__FILE__) . '/');
+ */
+if ( ! defined( 'ABSPATH' ) ) {
+	define( 'ABSPATH', dirname( __FILE__ ) . '/' );
 }
 
 /**
  * Sets up WordPress vars and included files.
-*/
+ */
 require_once ABSPATH . 'wp-settings.php';

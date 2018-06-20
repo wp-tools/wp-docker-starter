@@ -4,4 +4,12 @@
 data
 wordpress/core
 wordpress/vendor
-wordpress/wp-content
+
+# Ignore all content except for exlusions.
+wordpress/wp-content/*
+
+# Don't ignore these.
+# If you're developing a theme or plugin, ass it as an exlusions.
+!wordpress/wp-content/plugins/.gitkeep
+!wordpress/wp-content/themes/.gitkeep
+!wordpress/wp-content/uploads/.gitkeep
