@@ -3,38 +3,58 @@
 # Show available make commands.
 usage:
 	@echo "Please supply one of:"
-	@echo "\tinit:\n\t\t- Initializes WordPress (by cloning from Git)."
-	@echo "\tbuild:\n\t\t- Rebuilds the WordPress Docker image."
-	@echo "\tup:\n\t\t- Run Docker images with 'docker-compose up'."
-	@echo "\tdown:\n\t\t- Stops Docker images with 'docker-compose down'."
+	@echo "\tenv\n\t\t- Copies .env.dist to .env"
+	@echo "\tsetup\n\t\t- Prepares WordPress folders and installs WordPress."
+	@echo "\tbuild\n\t\t- Rebuilds the WordPress Docker image."
+	@echo "\tup\n\t\t- Run WordPress services with 'docker-compose up'."
+	@echo "\tdown\n\t\t- Stops WordPress services with 'docker-compose down'."
+	@echo "\tquickstart\n\t\t- Gets you going with the defaults. Only do this once. Use 'make up' next time."
 
-# Initializes WordPress.
+# env copies the environment variables.
+env:
+	cp .env.dist .env
+
+# setup prepares your project and installs WordPress.
+setup:
+	@docker-compose --log-level CRITICAL up -d wordpress-php 2>/dev/null
+	@docker-compose exec -w /app/wordpress wordpress-php composer install
+	@docker-compose exec -w /app/wordpress/core wordpress-php wp core download --skip-content
+ifneq (${WP_MULTISITE},true)
+	@echo "Running WordPress single site installation..."
+	@docker-compose exec -w /app/wordpress/core wordpress-php sh -c 'wp core install --url="${WP_DOMAIN}" --admin_user="${WP_USER}" --admin_password="${WP_PASS}" --admin_email=${WP_EMAIL} --skip-email --title="${WP_SITE_TITLE}"'
+else
+	@echo "Running WordPress multi-site network installation..."
+	@docker-compose exec -w /app/wordpress/core wordpress-php sh -c 'wp core multisite-install --url="${WP_DOMAIN}" --admin_user="${WP_USER}" --admin_password="${WP_PASS}" --admin_email=${WP_EMAIL} --skip-email --title="${WP_SITE_TITLE}"'
+endif
+	@docker-compose down 2>/dev/null
+	@echo "[DONE] Run 'make up' to start the WordPress services."
+
+# build rebuilds your WordPress PHP image.
+build:
+	@docker-compose build --no-cache
+
+# up launches the WordPress services.
+up:
+	@docker-compose up
+
+# down gracefully shuts it all down.
+down:
+	@docker-compose down
+
+# quickstart gets you going with the defaults.
+quickstart: env setup up
+
+# CAUTION: Use the below targets only if you know what you're doing.
+
+# kill the WordPress database. You will need to run `make init` to get it back.
 kill:
 	@docker-compose run --rm -w /app/wordpress/core wordpress-php wp db drop --yes 2>/dev/null
 	@docker-compose down 2>/dev/null
 
+# init the WordPress database. This will fail if a database exists.
 init:
 	@docker-compose run --rm -w /app/wordpress/core wordpress-php wp db create 2>/dev/null
 	@docker-compose down 2>/dev/null
 
+# reset the WordPress database. You will have an empty `wordpress` table.
 reset: kill init
-
-setup:
-	@docker-compose --log-level CRITICAL up -d wordpress-php 2>/dev/null
-	@docker-compose exec -w /app/wordpress wordpress-php composer install
-	@docker-compose exec -w /app/wordpress/core wordpress-php wp core download --skip-plugins --skip-themes
-ifneq (${WP_MULTISITE},true)
-	@docker-compose exec -w /app/wordpress/core wordpress-php sh -c 'wp core install --url="${WP_DOMAIN}" --admin_user="${WP_USER}" --admin_password="${WP_PASS}" --admin_email=${WP_EMAIL} --skip-email --title="${WP_SITE_TITLE}"'
-else
-	@docker-compose exec -w /app/wordpress/core wordpress-php sh -c 'wp core multisite-install --url="${WP_DOMAIN}" --admin_user="${WP_USER}" --admin_password="${WP_PASS}" --admin_email=${WP_EMAIL} --skip-email --title="${WP_SITE_TITLE}"'
-endif
-	@docker-compose down 2>/dev/null
-
-build:
-	@docker-compose build
-
-up:
-	@docker-compose up
-
-down:
-	@docker-compose down
