@@ -6,6 +6,7 @@ wordpress/core
 wordpress/vendor
 
 # Ignore wp-content except for exclusions.
+wordpress/wp-content/index.php
 wordpress/wp-content/plugins/*
 wordpress/wp-content/themes/*
 wordpress/wp-content/uploads/*
