@@ -7,7 +7,6 @@
   ],
   "require": {
     "johnpbloch/wordpress-core-installer": "^1",
-    "johnpbloch/wordpress-core": "4.9.6",
     "wpackagist-theme/twentyseventeen": "1.6"
   },
   "extra": {

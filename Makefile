@@ -22,6 +22,7 @@ reset: kill init
 setup:
 	@docker-compose --log-level CRITICAL up -d wordpress-php 2>/dev/null
 	@docker-compose exec -w /app/wordpress wordpress-php composer install
+	@docker-compose exec -w /app/wordpress/core wordpress-php wp core download
 ifneq (${WP_MULTISITE},true)
 	@docker-compose exec -w /app/wordpress/core wordpress-php sh -c 'wp core install --url="${WP_DOMAIN}" --admin_user="${WP_USER}" --admin_password="${WP_PASS}" --admin_email=${WP_EMAIL} --skip-email --title="${WP_SITE_TITLE}"'
 else
