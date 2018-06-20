@@ -8,7 +8,6 @@ usage:
 	@echo "\tbuild\n\t\t- Rebuilds the WordPress Docker image."
 	@echo "\tup\n\t\t- Run WordPress services with 'docker-compose up'."
 	@echo "\tdown\n\t\t- Stops WordPress services with 'docker-compose down'."
-	@echo "\tquickstart\n\t\t- Gets you going with the defaults. Only do this once. Use 'make up' next time."
 
 # env copies the environment variables.
 env:
@@ -40,9 +39,6 @@ up:
 # down gracefully shuts it all down.
 down:
 	@docker-compose down
-
-# quickstart gets you going with the defaults.
-quickstart: env setup up
 
 # CAUTION: Use the below targets only if you know what you're doing.
 
