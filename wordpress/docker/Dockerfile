@@ -40,5 +40,5 @@ COPY xdebug.ini /usr/local/etc/php/conf.d/xdebug-dev.ini
 
 USER www-data
 
-WORKDIR /var/www
+WORKDIR /app/wordpress
 CMD ["php-fpm"]
