@@ -10,10 +10,13 @@ wordpress/wp-content/index.php
 wordpress/wp-content/plugins/*
 wordpress/wp-content/themes/*
 wordpress/wp-content/uploads/*
+wordpress/wp-content/upgrade/*
 wordpress/wp-content/mu-plugins/*
 
 # Don't ignore these.
 # If you're developing a theme or plugin, add it as an exlusions.
+!wordpress/wp-content/plugins/.gitkeep
+!wordpress/wp-content/themes/.gitkeep
 # !wordpress/wp-content/plugins/example-plugin
 # !wordpress/wp-content/themes/example-theme
 # !wordpress/wp-content/mu-plugins/example-plugin.php
