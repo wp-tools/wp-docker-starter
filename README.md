@@ -1,6 +1,7 @@
 # wp-docker-starter
 
-This project is a simple starter to get you going with local WordPress development using Docker. 
+This project is a simple starter to get you going with local WordPress development using Docker. It even has subdomain multi-site support out of the box, just flip the switch. Huzzah!
+ 
 
 **Requirements:**
 
@@ -28,7 +29,7 @@ Or you can download the repo as a zip, extract it and run the three make command
 
 ### Why another WordPress Docker project?
 
-This project is primarily for me to document my own processes. This is a started project with the intent of ending up with
+This project is primarily for me to document my own processes. This is a starter project with the intent of ending up with
 a project that probably won't look anything like this.  In fact, I recommend running `rm -rf .git` straight away to detach
 from this repo. 
 
