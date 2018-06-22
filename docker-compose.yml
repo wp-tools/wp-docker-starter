@@ -18,8 +18,7 @@ services:
 ### WordPress PHP ###############################################
 
   wordpress-php:
-    build:
-      context: ./wordpress/docker
+    image: wptools/php-dev
     volumes:
       - ./wordpress:/app/wordpress
       - ./wordpress/wp-content:/app/wordpress/core/wp-content
