@@ -100,6 +100,8 @@ if ( 'true' === getenv( 'WP_MULTISITE' ) ) {
  */
 define( 'WP_DEBUG', '${WP_DEBUG}' );
 
+define( 'DISABLE_WP_CRON', true );
+
 /* That's all, stop editing! Happy blogging. */
 
 /**

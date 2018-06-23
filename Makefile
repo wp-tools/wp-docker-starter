@@ -40,6 +40,13 @@ up:
 down:
 	@docker-compose down
 
+cron:
+	@crontab -l | grep -q 'http://wordpress.local/wp-cron.php?doing_wp_cron'  && echo 'entry exists' || (crontab -l 2>/dev/null; echo "*/5 * * * * curl http://wordpress.local/wp-cron.php?doing_wp_cron >/dev/null 2>&1") | crontab -
+	@echo Cron task added.
+
+cleancron:
+	@crontab -l | grep -q 'http://wordpress.local/wp-cron.php?doing_wp_cron' | crontab -
+
 # CAUTION: Use the below targets only if you know what you're doing.
 
 # kill the WordPress database. You will need to run `make init` to get it back.
