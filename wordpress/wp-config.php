@@ -87,6 +87,36 @@ if ( 'true' === getenv( 'WP_MULTISITE' ) ) {
 }
 
 /**
+ * WordPress Cache.
+ *
+ * Page and Object caching are both backed by Redis.
+ */
+define( 'WP_CACHE',          true );
+define( 'WP_CACHE_KEY_SALT', 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855' );
+
+// Redis settings.
+if ( true === WP_CACHE ) {
+	global $redis_server, $redis_page_cache_config;
+
+	$redis_server = array(
+		'host'     => 'wordpress-redis',
+		'port'     => 6379,
+		'auth'     => 'password',
+		'database' => 0,
+	);
+
+	$redis_page_cache_config = array(
+		'redis_host'          => 'wordpress-redis',
+		'redis_port'          => 6379,
+		'redis_auth'          => 'password',
+		'redis_db'            => 0,
+		'ttl'                 => 86400,
+		'debug'               => false,
+		'gzip'                => true,
+	);
+}
+
+/**
  * For developers: WordPress debugging mode.
  *
  * Change this to true to enable the display of notices during development.

@@ -7,7 +7,10 @@
   ],
   "require": {
     "johnpbloch/wordpress-core-installer": "^1",
-    "wpackagist-theme/twentyseventeen": "1.6"
+    "wpackagist-theme/twentyseventeen": "1.6",
+    "wpackagist-plugin/wp-redis":"0.7.0",
+    "wpackagist-plugin/pj-page-cache-red":"0.8.3",
+    "wpackagist-plugin/rewrite-rules-inspector":"1.2.1"
   },
   "extra": {
     "installer-paths": {
