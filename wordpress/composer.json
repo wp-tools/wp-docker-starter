@@ -1,4 +1,6 @@
 {
+  "name":"WordPress Local Development",
+  "description":"A Docker environment for WordPress development (not production).",
   "repositories": [
     {
       "type": "composer",
