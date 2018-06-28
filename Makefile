@@ -25,6 +25,8 @@ else
 	@echo "Running WordPress multi-site network installation..."
 	@docker-compose exec -w /app/wordpress/core wordpress-php sh -c 'wp core multisite-install --url="${WP_DOMAIN}" --admin_user="${WP_USER}" --admin_password="${WP_PASS}" --admin_email=${WP_EMAIL} --skip-email --title="${WP_SITE_TITLE}"'
 endif
+	@mv wordpress/wp-content/_object-cache.php wordpress/wp-content/object-cache.php
+	@mv wordpress/wp-content/_advanced-cache.php wordpress/wp-content/advanced-cache.php
 	@docker-compose down 2>/dev/null
 	@echo "[DONE] Run 'make up' to start the WordPress services."
 
