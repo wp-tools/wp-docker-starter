@@ -61,10 +61,11 @@ this repo. Have a poke around and you will see a `data` folder in this folder af
 - wp-cli: Doing WordPress things from the command line. In our case, via docker-compose and on the running image.
 - php-unit: Because we all love to test our code.
 - GNU make: Makefiles are old technology, but they are a super convenient alternative to bash scripts if you don't need them. Because we are executing code on containers, this is tool is invaluable.
-- Composer: Composer is a great tool. Its a beast if you don't have it locally, but we're running it all in a container here. Please also applaud all the work from the <https://wpackagist.org/> project.
+- Composer: Composer is a great tool. Its a beast if you don't have it locally, but we're running it all in a container here. Please also applaud all the work from the <https://wpackagist.org/> project.  
+- Redis: Having page caching and the object cache served from a persistent cache is always a good thing. Even for local development (how else will you test that your caching code actually works).
 
 There are some tools that have not made it to the list yet, but I will add them as the need arises. Or you are free to add them via
-pull requests to this repo. For example, I have not yet added a `redis` support, I may not at all. Its not on my scope at the moment.
+pull requests to this repo.
 
 ---
 
